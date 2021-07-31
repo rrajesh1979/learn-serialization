@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class KryoSerialization {
+    public static final int NUM_ITERATIONS = 100000;
     static final MetricRegistry metrics = new MetricRegistry();
     static Histogram serializationHistogram = null;
     static Histogram deSerializationHistogram = null;
@@ -40,7 +41,7 @@ public class KryoSerialization {
         deSerializationHistogram = metrics.histogram("deSerializationTime " + Account.class);
         fileName = "account.dat";
         Account account = new Account("John", "Doe", "1899 Johnstown Road, East Dundee, Illinois, 60118", 10002, 100000.00, "Savings");
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
             new KryoSerialization().kryoSerialization(fileName, account, Account.class);
         }
 
@@ -50,7 +51,7 @@ public class KryoSerialization {
         User user = new User();
         user.setId(1);
         user.setName("Mark");
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
             new KryoSerialization().kryoSerialization(fileName, user, User.class);
         }
         reporter.report();

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class InMemorySerialization {
+    public static final int NUM_ITERATIONS = 100000;
     static final MetricRegistry metrics = new MetricRegistry();
     static Histogram serializationHistogram = null;
     static Histogram deSerializationHistogram = null;
@@ -20,24 +21,22 @@ public class InMemorySerialization {
     public static void main(String[] args) {
         final Slf4jReporter reporter = Slf4jReporter.forRegistry(metrics)
                 .outputTo(log)
-                .convertRatesTo(TimeUnit.SECONDS)
-                .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .build();
         reporter.start(1, TimeUnit.MINUTES);
 
         serializationHistogram = metrics.histogram("serializationTime " + Account.class);
-        deSerializationHistogram = metrics.histogram("serializationTime " + Account.class);
+        deSerializationHistogram = metrics.histogram("deSerializationTime " + Account.class);
         Account account = new Account("John", "Doe", "1899 Johnstown Road, East Dundee, Illinois, 60118", 10002, 100000.00, "Savings");
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
             new InMemorySerialization().fileSerialization(account, Account.class);
         }
 
         serializationHistogram = metrics.histogram("serializationTime " + User.class);
-        deSerializationHistogram = metrics.histogram("serializationTime " + User.class);
+        deSerializationHistogram = metrics.histogram("deSerializationTime " + User.class);
         User user = new User();
         user.setId(1);
         user.setName("Mark");
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
             new InMemorySerialization().fileSerialization(user, User.class);
         }
         reporter.report();

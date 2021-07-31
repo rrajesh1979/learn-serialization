@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class JavaSerialization {
     static final MetricRegistry metrics = new MetricRegistry();
+    public static final int NUM_ITERATIONS = 100000;
     static Histogram serializationHistogram = null;
     static Histogram deSerializationHistogram = null;
 
@@ -21,8 +22,6 @@ public class JavaSerialization {
         String fileName = null;
         final Slf4jReporter reporter = Slf4jReporter.forRegistry(metrics)
                 .outputTo(log)
-//                .convertRatesTo(TimeUnit.SECONDS)
-//                .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .build();
         reporter.start(1, TimeUnit.MINUTES);
 
@@ -30,7 +29,7 @@ public class JavaSerialization {
         deSerializationHistogram = metrics.histogram("deSerializationTime " + Account.class);
         fileName = "account.txt";
         Account account = new Account("John", "Doe", "1899 Johnstown Road, East Dundee, Illinois, 60118", 10002, 100000.00, "Savings");
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
             new JavaSerialization().fileSerialization(fileName, account, Account.class);
         }
 
@@ -40,7 +39,7 @@ public class JavaSerialization {
         User user = new User();
         user.setId(1);
         user.setName("Mark");
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUM_ITERATIONS; i++) {
             new JavaSerialization().fileSerialization(fileName, user, User.class);
         }
         reporter.report();
