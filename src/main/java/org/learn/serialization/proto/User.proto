@@ -1,0 +1,8 @@
+syntax = "proto3";
+package protobuf;
+option java_package = "org.learn.serialization.proto";
+option java_outer_classname = "UserProtos";
+message User {
+  int32 id = 2;
+  string name = 3;
+}

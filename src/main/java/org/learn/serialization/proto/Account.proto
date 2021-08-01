@@ -1,0 +1,12 @@
+syntax = "proto3";
+package protobuf;
+option java_package = "org.learn.serialization.proto";
+option java_outer_classname = "AccountProtos";
+message Account {
+  string firstName = 2;
+  string lastName = 3;
+  string address = 4;
+  int32 accountNumber = 5;
+  double accountBalance = 6;
+  string accountType = 7;
+}
