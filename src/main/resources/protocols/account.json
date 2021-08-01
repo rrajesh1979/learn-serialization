@@ -1,0 +1,8 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "address": "1899 Johnstown Road, East Dundee, Illinois, 60118",
+  "accountNumber": 10002,
+  "accountBalance": 100000.0,
+  "accountType": "Savings"
+}
