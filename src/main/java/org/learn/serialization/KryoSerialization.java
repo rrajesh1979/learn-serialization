@@ -83,6 +83,7 @@ public class KryoSerialization {
             switch (ObjClass.getName()) {
                 case "User":
                     User readUser = (User)kryo.readClassAndObject(input);
+                    break;
                 case "Account":
                     Account readAccount = (Account)kryo.readClassAndObject(input);
             }

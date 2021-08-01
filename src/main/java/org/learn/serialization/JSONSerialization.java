@@ -79,6 +79,7 @@ public class JSONSerialization {
             switch (ObjClass.getName()) {
                 case "org.learn.domain.User":
                     User deserializedUser = gsonReader.fromJson(reader, User.class);
+                    break;
                 case "org.learn.domain.Account":
                     Account deserializedAccount = gsonReader.fromJson(reader, Account.class);
             }

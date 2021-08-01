@@ -76,6 +76,7 @@ public class JavaSerialization {
             switch (ObjClass.getName()) {
                 case "User":
                     User deserializedUser = (User) objectInputStream.readObject();
+                    break;
                 case "Account":
                     Account deserializedAccount = (Account) objectInputStream.readObject();
             }

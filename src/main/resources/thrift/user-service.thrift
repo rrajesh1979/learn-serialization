@@ -9,6 +9,7 @@ exception InvalidOperationException {
 struct UserResource {
     1: i32 id,
     2: string name,
+    3: i64 serialVersionUID
 }
 
 service UserService {
