@@ -44,7 +44,6 @@ public class JavaSerialization {
         }
         reporter.report();
 
-
     }
 
     public void fileSerialization(String fileName, Object obj, Class ObjClass) {
@@ -56,9 +55,9 @@ public class JavaSerialization {
 
         try {
             //start serialization
+            watch.start();
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            watch.start();
             objectOutputStream.writeObject(obj);
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -69,10 +68,10 @@ public class JavaSerialization {
             //end serialization
 
             //start de-serialization
-            FileInputStream fileInputStream = new FileInputStream(filePath);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             watch.reset();
             watch.start();
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             switch (ObjClass.getName()) {
                 case "User":
                     User deserializedUser = (User) objectInputStream.readObject();

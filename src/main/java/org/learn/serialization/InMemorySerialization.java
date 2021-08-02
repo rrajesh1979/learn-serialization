@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class InMemorySerialization {
-    public static final int NUM_ITERATIONS = 1;
+    public static final int NUM_ITERATIONS = 100000;
     static final MetricRegistry metrics = new MetricRegistry();
     static Histogram serializationHistogram = null;
     static Histogram deSerializationHistogram = null;

@@ -58,10 +58,9 @@ public class JSONSerialization {
 
         try {
             //start serialization
+            watch.start();
             Writer writer = new FileWriter(filePath);
             Gson gsonWriter = new GsonBuilder().setPrettyPrinting().create();
-
-            watch.start();
             gsonWriter.toJson(obj, writer);
             writer.flush();
             writer.close();
@@ -72,10 +71,10 @@ public class JSONSerialization {
             //end serialization
 
             //start de-serialization
-            Reader reader = new FileReader(filePath);
-            Gson gsonReader = new GsonBuilder().setPrettyPrinting().create();
             watch.reset();
             watch.start();
+            Reader reader = new FileReader(filePath);
+            Gson gsonReader = new GsonBuilder().setPrettyPrinting().create();
             switch (ObjClass.getName()) {
                 case "org.learn.domain.User":
                     User deserializedUser = gsonReader.fromJson(reader, User.class);

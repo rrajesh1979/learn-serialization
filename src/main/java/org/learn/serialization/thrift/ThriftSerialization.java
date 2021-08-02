@@ -9,17 +9,12 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.StopWatch;
-import org.learn.domain.Account;
-import org.learn.domain.User;
 import org.learn.serialization.thrift.impl.AccountResource;
 import org.learn.serialization.thrift.impl.UserResource;
 
-import java.io.*;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -74,8 +69,8 @@ public class ThriftSerialization {
 
         try {
             //start serialization
-            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             watch.start();
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
             byte[] byteBuffer = null;
             switch (ObjClass.getName()) {
@@ -94,10 +89,10 @@ public class ThriftSerialization {
             //end serialization
 
             //start de-serialization
-            TDeserializer deserializer = new TDeserializer(new TBinaryProtocol.Factory());
-            FileInputStream fileInputStream = new FileInputStream(filePath);
             watch.reset();
             watch.start();
+            TDeserializer deserializer = new TDeserializer(new TBinaryProtocol.Factory());
+            FileInputStream fileInputStream = new FileInputStream(filePath);
             switch (ObjClass.getName()) {
                 case "org.learn.serialization.thrift.impl.UserResource":
                     UserResource userRead = new UserResource();

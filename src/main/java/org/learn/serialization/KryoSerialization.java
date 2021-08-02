@@ -65,11 +65,9 @@ public class KryoSerialization {
         StopWatch watch = new StopWatch();
 
         try {
-            Output output = new Output(new FileOutputStream(filePath));
-            Input input = new Input(new FileInputStream(filePath));
-
             //start serialization
             watch.start();
+            Output output = new Output(new FileOutputStream(filePath));
             kryo.writeClassAndObject(output, obj);
             output.close();
             watch.stop();
@@ -80,6 +78,7 @@ public class KryoSerialization {
             //start de-serialization
             watch.reset();
             watch.start();
+            Input input = new Input(new FileInputStream(filePath));
             switch (ObjClass.getName()) {
                 case "User":
                     User readUser = (User)kryo.readClassAndObject(input);
